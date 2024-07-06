@@ -7,7 +7,7 @@
         "foe": {}
     },
     "Item": {
-        "types": ["job", "ability", "bond", "bond-power", "junk", "relic"],
+        "types": ["job", "ability", "bond", "bond-power", "junk", "relic", "camp"],
         "htmlFields": ["description"],
         "job": {}
     }
