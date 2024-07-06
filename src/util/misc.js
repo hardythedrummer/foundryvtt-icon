@@ -36,15 +36,20 @@ export function removeAllUUIDRefs(text) {
 
 /**
  * Read the value of a store. Can be expensive, so don't spam it if subscribing would make more sense
+ *
  * @param {store} store 
  */
 export function getStore(store) {
     let val;
     // Sub and immediately unsub
-    store.subscribe(x => val = x)();
+    store.subscribe((x) => val = x)();
     return val;
 }
 
+/**
+ *
+ * @param doc
+ */
 export function confirmDeleteDocument(doc) {
     TJSDialog.confirm({
         content: `Delete ${doc.name}?`,
@@ -107,6 +112,7 @@ export function simpleMixList(existing_list, new_item, insertion_point, replace_
  * Synthetic Actor Token Image -> Prototype Token Image -> Actor image
  *
  * @param {Actor | Token} actor Actor to get token image of possibly
+ *
  * @param {string} def Default value
  *
  * @returns {string} Image path
@@ -125,9 +131,11 @@ export function actorTokenImage(actor, def = null) {
     }
 }
 
-/** Returns a text but with all tags removed. Just inner html all throughout
+/**
+ * Returns a text but with all tags removed. Just inner html all throughout
  * 
  * @param {string} raw_text 
+ *
  * @returns {string}
  */
 export function scourHTML(raw_text) {
@@ -135,9 +143,11 @@ export function scourHTML(raw_text) {
     return raw_text.replaceAll(/<\s*\/?\s*\W+\s*>/g, "");
 }
 
-/** Returns a text but with all tags removed. Just inner html all throughout
+/**
+ * Returns a text but with all tags removed. Just inner html all throughout
  * 
  * @param {string} raw_text 
+ *
  * @returns {string}
  */
 export function scourRefs(raw_text) {
@@ -149,28 +159,35 @@ export function scourRefs(raw_text) {
 /**
  * 
  * @param {Item} source The item that was dragged
+ *
  * @param {DropEvent} event 
  */
 export async function handleSortEmbeddedItem(source, event) {
     // Just add it to the end of the list
     let drop_target = event.target.closest("[data-uuid]");
     let target = await fromUuid(drop_target?.dataset.uuid);
-    if(!target) return;
+    if (!target) {
+return;
+}
 
     // Don't sort on yourself
-    if (source.id === target.id) return;
+    if (source.id === target.id) {
+return;
+}
 
     // Identify sibling items based on adjacent HTML elements
     const siblings = [];
     for (let el of drop_target.parentElement.children) {
         let sibling_id = el.dataset.uuid;
         let sibling = await fromUuid(sibling_id); 
-        if (sibling && sibling !== source) siblings.push(sibling);
+        if (sibling && sibling !== source) {
+siblings.push(sibling);
+}
     }
 
     // Perform the sort
     const sort_updates = SortingHelpers.performIntegerSort(source, { target, siblings });
-    const update_data = sort_updates.map(u => {
+    const update_data = sort_updates.map((u) => {
         const update = u.update;
         update._id = u.target._id;
         return update;

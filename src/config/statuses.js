@@ -24,7 +24,9 @@ export function enhanceStatuses() {
 
 /**
  * Converts an ability to a status, e.x. for marks, stances, and power dice
+ *
  * @param ability_choice A choice item on an ability
+ *
  * @returns An appropriate effect object
  */
 export function abilityChoiceToStatus(ability_choice) {
@@ -43,6 +45,10 @@ export function abilityChoiceToStatus(ability_choice) {
 }
 
 // Save against an active effect
+/**
+ *
+ * @param {...any} effects
+ */
 export async function saveAgainst(...effects) {
     let rolls = [];
     let messages = [];
@@ -65,7 +71,7 @@ export async function saveAgainst(...effects) {
         rolls.push(roll);
     }
     let content = `<div class="flexcol">
-        ${messages.map(m => `<span>${m}</span>`).join("")}
+        ${messages.map((m) => `<span>${m}</span>`).join("")}
     </div>`;
 
     return ChatMessage.create({

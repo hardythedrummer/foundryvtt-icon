@@ -18,7 +18,7 @@ Hooks.on("controlToken", (token, controlled) => {
         });
     } else {
         SELECTED_TOKENS.update((s) => {
-            return s.filter(t => t != token);
+            return s.filter((t) => t != token);
         });
     }
 });
@@ -33,7 +33,7 @@ Hooks.on("targetToken", (user, token, targeted) => {
         });
     } else {
         TARGETED_TOKENS.update((s) => {
-            return s.filter(t => t != token);
+            return s.filter((t) => t != token);
         });
     }
 });

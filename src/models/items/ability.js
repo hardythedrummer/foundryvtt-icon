@@ -183,9 +183,6 @@ export class AbilityModel extends ItemModel {
             // Upgrades for player abilities
             talents: new ControlledLengthArrayField(new AbilityAugmentationField(), { length: 2 }),
             mastery: new AbilityAugmentationField(),
-
-            // Status
-            equipped: new fields.BooleanField({ initial: true })
         };
     }
 
@@ -193,8 +190,8 @@ export class AbilityModel extends ItemModel {
         // Select an active choice based on combo state
         let combo_token = this.parent.actor?.system.combo ?? null;
         this.active_choice = this.choices[0];
-        if(combo_token && this.active_choice.combo === 1) {
-            this.active_choice = this.choices.find(c => c.combo === -1) ?? this.active_choice;
+        if (combo_token && this.active_choice.combo === 1) {
+            this.active_choice = this.choices.find((c) => c.combo === -1) ?? this.active_choice;
         }
     }
 }

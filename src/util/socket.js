@@ -1,6 +1,7 @@
 let my_socket;
 
 Hooks.once("socketlib.ready", () => {
+	// eslint-disable-next-line no-undef
 	my_socket = socketlib.registerSystem(game.system.id);
 	my_socket.register("update-message", updateMessageInner);
 });

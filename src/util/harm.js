@@ -72,7 +72,7 @@ export async function showHarmApplication() {
  */
 
 /**
- * @typedef {Record<string, Array<HarmRecord>} HarmManifest Tracks harm to several actors, in the order it was inflicted
+ * @typedef {Record<string, Array<HarmRecord>>} HarmManifest Tracks harm to several actors, in the order it was inflicted
  */
 
 /**
@@ -130,7 +130,7 @@ export function computeHarm(actor, type, amount, flags) {
 
     // Attacker effects apply first
     if (flags.includes("weakened") && amount > 0) {
-        amount = Math.max(0, amount -2);
+        amount = Math.max(0, amount - 2);
         deltas.push(["weakened", -2]);
     }
     if (flags.includes("pacified")) {
@@ -217,7 +217,7 @@ export function planHarm(actor, harm_instances) {
     let result = [];
 
     // If the actor does not have hp, then return no records
-    if(!actor.system.hp) {
+    if (!actor.system.hp) {
         return result;
     }
 
@@ -410,16 +410,17 @@ export async function quickDamage(harms) {
 /**
  * 
  * @param {Actor} actor Actor to check effects on
+ *
  * @returns {HarmInstance["flags"]} Relevant flags on the attacker
  */
 export function flagsForAttacker(actor) {
     /** @type {HarmInstance["flags"]} */
-    let result = []
-    if(actor.effects.some(e => e.name === "Weakened")) {
-        result.push("weakened")
+    let result = [];
+    if (actor.effects.some((e) => e.name === "Weakened")) {
+        result.push("weakened");
     }
-    if(actor.effects.some(e => e.name === "Pacified")) {
-        result.push("pacified")
+    if (actor.effects.some((e) => e.name === "Pacified")) {
+        result.push("pacified");
     }
     return result;
 }
@@ -427,16 +428,17 @@ export function flagsForAttacker(actor) {
 /**
  * 
  * @param {Actor} actor Actor to check effects on
+ *
  * @returns {HarmInstance["flags"]} Relevant flags on the defender
  */
 export function flagsForDefender(actor) {
     /** @type {HarmInstance["flags"]} */
-    let result = []
-    if(actor.effects.some(e => e.name === "Vulnerable")) {
-        result.push("vulnerable")
+    let result = [];
+    if (actor.effects.some((e) => e.name === "Vulnerable")) {
+        result.push("vulnerable");
     }
-    if(actor.effects.some(e => e.name === "Shattered")) {
-        result.push("shattered")
+    if (actor.effects.some((e) => e.name === "Shattered")) {
+        result.push("shattered");
     }
     return result;
 }
@@ -444,12 +446,15 @@ export function flagsForDefender(actor) {
 /**
  * 
  * @param {number} die The damage die number
+ *
  * @param {number} die_count How many damage die
+ *
  * @param {number | string} flat_bonuses All the flat bonuses. Fray etc
+ *
  * @param {number} bonus_damage How many instances of bonus damage they have
  */
 export function buildDamageFormula(die, die_count, flat_bonuses, bonus_damage) {
-    if(die_count <= 0) {
+    if (die_count <= 0) {
         return flat_bonuses.toString();
     } else if (bonus_damage <= 0) {
         return `${die_count}d${die} + ${flat_bonuses}`;
