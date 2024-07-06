@@ -24,7 +24,7 @@
     <span>Fray: {$actor.system.class?.fray_damage ?? 0}</span>
     <span>Speed: {$actor.system.class?.speed ?? 0}</span>
     <span>Dash: {$actor.system.class?.dash ?? 0}</span>
-    {#if $actor.type === "player"}
+    {#if $actor.type === "player" || $actor.type === "foe"}
         <label for="combo" id="combolabel">{localize("ICON.Combo")}</label>
         <input name="combo" type="checkbox" use:updateDoc={{doc: actor, path: "system.combo"}} />
     {/if}
