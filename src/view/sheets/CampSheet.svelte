@@ -2,9 +2,11 @@
     import { getContext } from "svelte";
     import { updateDoc } from "../actions/update";
     import Portrait from "../components/Portrait.svelte";
+    import DocClock from '../components/generic/DocClock.svelte';
     // import EditableDocArray from "../components/generic/EditableDocArray.svelte";
     // import ProseMirrorEditor from "../components/generic/ProseMirrorEditor.svelte";
 
+    let actor = getContext("tjs_actor");
     let item = getContext("tjs_item");
     let doc = item; // Alias
 </script>
@@ -12,11 +14,11 @@
 <main>
     <!-- Sheet Header -->
     <header>
-        <Portrait style="grid-area: pic" />
+        <Portrait style="padding: 0 0 0 10px"/>
 
-        <div style="grid-area: name">
-            <label for="group_name"><h3>Group Name:</h3></label>
-            <input name="group_name" type="text" use:updateDoc={{ doc, path: "group_name" }} />
+        <div style="flex: 1; margin: 0 0 0 10px;">
+            <label for="name"><h3>Group Name:</h3></label>
+            <input name="name" type="text" use:updateDoc={{ doc, path: "name" }} />
         </div>
     </header>
 
@@ -25,7 +27,12 @@
     <!-- Sheet Body -->
     <section class="sheet-body">
         <div class="flexcol">
-           
+            <div class="ambitions">
+                <h2>Ambitions</h2>
+                {#each Object.entries($item.system.ambitions) as [key, _clock]}
+                    <DocClock clock_width="60px" path={`system.ambitions.${key}`} />
+                {/each}
+            </div>
         </div>
     </section>
 </main>
@@ -39,8 +46,8 @@
     }
 
     header {
-        display: grid;
-        grid-template: "pic options name" 90px / 90px 1fr 1fr;
+        display: flex;
+        padding: 10px;
     }
 
     .sheet-body {

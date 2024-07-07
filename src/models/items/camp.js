@@ -7,7 +7,6 @@ export class CampModel extends ItemModel {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            group_name: new fields.StringField(),
             ambitions: new fields.SchemaField({
                 c1: new ClockField({ }, { initial: () => ({ name: "Ambition 1" }) }),
                 c2: new ClockField({ }, { initial: () => ({ name: "Ambition 2" }) }),
