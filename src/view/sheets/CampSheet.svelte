@@ -2,9 +2,7 @@
     import { getContext } from "svelte";
     import { updateDoc } from "../actions/update";
     import Portrait from "../components/Portrait.svelte";
-    import DocClock from '../components/generic/DocClock.svelte';
-    // import EditableDocArray from "../components/generic/EditableDocArray.svelte";
-    // import ProseMirrorEditor from "../components/generic/ProseMirrorEditor.svelte";
+    import DocClock from "../components/generic/DocClock.svelte";
 
     let actor = getContext("tjs_actor");
     let item = getContext("tjs_item");
@@ -14,7 +12,7 @@
 <main>
     <!-- Sheet Header -->
     <header>
-        <Portrait style="padding: 0 0 0 10px"/>
+        <Portrait style="padding: 0 0 0 10px" />
 
         <div style="flex: 1; margin: 0 0 0 10px;">
             <label for="name"><h3>Group Name:</h3></label>
@@ -22,17 +20,16 @@
         </div>
     </header>
 
-    <!-- Sheet Tab Navigation -->
-
     <!-- Sheet Body -->
     <section class="sheet-body">
-        <div class="flexcol">
-            <div class="ambitions">
-                <h2>Ambitions</h2>
-                {#each Object.entries($item.system.ambitions) as [key, _clock]}
-                    <DocClock clock_width="60px" path={`system.ambitions.${key}`} />
-                {/each}
-            </div>
+        <div class="ambitions">
+            <h2>Ambitions</h2>
+            {#each Object.entries($item.system.ambitions) as [key, _clock]}
+                <DocClock clock_width="60px" path={`system.ambitions.${key}`} />
+            {/each}
+        </div>
+        <div class="fixtures">
+            <h2>Fixtures</h2>
         </div>
     </section>
 </main>
@@ -52,7 +49,7 @@
 
     .sheet-body {
         padding: 5px;
-        flex: 1 0 auto;
+        flex: 1 1 auto;
         max-height: calc(100% - 140px);
     }
 </style>

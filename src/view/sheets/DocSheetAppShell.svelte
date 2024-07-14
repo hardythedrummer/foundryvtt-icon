@@ -14,6 +14,7 @@
     import BondPowerSheet from "./BondPowerSheet.svelte";
     import RelicSheet from "./RelicSheet.svelte";
     import CampSheet from "./CampSheet.svelte";
+    import FixtureSheet from "./FixtureSheet.svelte";
 
     export let elementRoot = void 0;
 
@@ -46,6 +47,8 @@
         <RelicSheet />
     {:else if $tjs_doc.type == "camp"}
         <CampSheet />
+    {:else if $tjs_doc.type == "fixture"}
+        <FixtureSheet />
     {:else}
         <span>Unsupported doc</span>
     {/if}

@@ -9,6 +9,7 @@ import { ItemModel } from "../models/items/item";
 import { JobModel } from "../models/items/job";
 import { RelicModel } from "../models/items/relic";
 import { CampModel } from "../models/items/camp";
+import { FixtureModel } from "../models/items/fixture";
 
 /**
  * Configure all of our system documents
@@ -22,7 +23,8 @@ export function setupModels() {
     CONFIG.Item.dataModels["bond-power"] = BondPowerModel;
     CONFIG.Item.dataModels["relic"] = RelicModel;
     CONFIG.Item.dataModels["camp"] = CampModel;
-
+    CONFIG.Item.dataModels["fixture"] = FixtureModel;
+    
     CONFIG.Actor.dataModels["junk"] = ActorModel; // Where we send actors we don't really care to deal with yet
     CONFIG.Actor.dataModels["player"] = PlayerModel;
     CONFIG.Actor.dataModels["foe"] = FoeModel;
